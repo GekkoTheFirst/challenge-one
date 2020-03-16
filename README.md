@@ -43,8 +43,9 @@ If you do not know the name of you emulator use this command to find existing em
 *NB!* Do not forget to activate [USB debugging](https://www.qafox.com/appium-enabling-debugging-mode-in-android-devices-emulators/) on emulator otherwise Appium won't recognise your device.
 To check if devices visible, you run command *adb devices* and you should get status _device_.
 >$ adb devices
->
-> List of devices attached \n
+
+> List of devices attached
+
 > emulator-5554	device
 
 2. Appium:
