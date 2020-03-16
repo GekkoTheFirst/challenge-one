@@ -1,9 +1,12 @@
-require 'date'
-require 'yaml'
-require 'rspec'
-require_relative 'main_activity'
+# NOTE:
+# Main
 
 RSpec.describe "MainActitivity" do
+  require 'date'
+  require 'yaml'
+  require 'rspec'
+  require_relative 'main_activity'
+
   # Global hook to create an appium web driver, YAML and Time objects
   before(:all) do
     # Appium driver
@@ -40,16 +43,17 @@ RSpec.describe "MainActitivity" do
   # After each hook if scenario has exception or fails then screenshot created
   after(:each) do |example|
     if example.exception
-      @driver.save_screenshot("outputs/#{@unix_time}.png")
+      @driver.save_viewport_screenshot("outputs/#{@unix_time}.png")
     end
   end
 
+  # After all cases it kills the appium driver
+  after(:all) do
+    @driver.quit()
+  end
+
+    # Section related to "now" time
     describe "interactions with current month elements" do
-      # There is no need of before hook. Session ends after
-      # this describe section
-      after(:all) do
-        @driver.quit
-      end
 
       it 'closes the application without crash' do
         @driver.close_app
@@ -70,112 +74,106 @@ RSpec.describe "MainActitivity" do
 
         expect(title).to eq(@elements['app_name'])
       end
-      #
-      # it 'shows checked today`s date' do
-      #   checked = @driver.find_element(:xpath,
-      #     "//android.view.View[@text='#{@today.day}']").checked?()
-      #
-      #   expect(checked).to eq("true")
-      # end
-      #
-      # it 'shows current in header' do
-      #   date = @driver.find_element(:id, 'android:id/date_picker_header_year').text
-      #
-      #   expect(date).to eq("#{@today.year}")
-      # end
-      #
-      # it 'shows today`s date in header' do
-      #   date = @driver.find_element(:id, 'android:id/date_picker_header_date').text
-      #
-      #   expect(date).to eq(@today.strftime('%a, %b %d'))
-      # end
-      #
-      # it 'shows yesterday`s date in header' do
-      #   select = @driver.find_element(:xpath,
-      #     "//android.view.View[@text='#{@yesterday.day}']").click
-      #   checked = @driver.find_element(:xpath,
-      #     "//android.view.View[@text='#{@yesterday.day}']").checked?()
-      #
-      #   expect(checked).to eq("true")
-      # end
-      #
-      # it 'shows checked tomorrow`s date after selecting' do
-      #   select = @driver.find_element(:xpath,
-      #     "//android.view.View[@text='#{@tomorrow.day}']").click
-      #   checked = @driver.find_element(:xpath,
-      #     "//android.view.View[@text='#{@tomorrow.day}']").checked?()
-      #
-      #   expect(checked).to eq("true")
-      # end
+
+      it 'shows checked today`s date' do
+        checked = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@today.day}']").checked?()
+
+        expect(checked).to eq("true")
+      end
+
+      it 'shows current in header' do
+        date = @driver.find_element(:id, @elements['id_header_year']).text
+
+        expect(date).to eq("#{@today.year}")
+      end
+
+      it 'shows today`s date in header' do
+        date = @driver.find_element(:id, @elements['id_header_date']).text
+
+        expect(date).to eq(@today.strftime('%a, %b %d'))
+      end
+
+      it 'shows yesterday`s date in header' do
+        select = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@yesterday.day}']").click
+        checked = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@yesterday.day}']").checked?()
+
+        expect(checked).to eq("true")
+      end
+
+      it 'shows checked tomorrow`s date after selecting' do
+        select = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@tomorrow.day}']").click
+        checked = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@tomorrow.day}']").checked?()
+
+        expect(checked).to eq("true")
+      end
     end
 
-    # describe "interactions with previous year elements" do
-    #   # New session starts to increase speed of tests
-    #   before(:all) do
-    #     @driver.start_driver()
-    #     swtich_months(12, 'prev')
-    #   end
-    #   # Session ends after this describe section
-    #   after(:all) do
-    #     @driver.quit
-    #   end
-    #
-    #   it 'doesn`t shows checked date last year' do # Scenario failing
-    #     checked = @driver.find_element(:xpath,
-    #       "//android.view.View[@text='#{@today.day}']").checked?()
-    #
-    #     expect(checked).to eq("false")
-    #   end
-    #
-    #   it 'shows last year in header after selecting' do
-    #     select = @driver.find_element(:xpath,
-    #       "//android.view.View[@text='#{@today.day}']").click
-    #     year = @driver.find_element(:id, 'android:id/date_picker_header_year').text
-    #
-    #     expect(year).to eq("#{@prev_year.year}")
-    #   end
-    #
-    #   it 'shows last year date in header after selecting' do
-    #     select = @driver.find_element(:xpath,
-    #       "//android.view.View[@text='#{@today.day}']").click
-    #     date = @driver.find_element(:id, 'android:id/date_picker_header_date').text
-    #
-    #     expect(date).to eq(@prev_year.strftime('%a, %b %d'))
-    #   end
-    # end
-    #
-    # describe "interaction with next year elements" do
-    #   # New session starts to increase speed of tests
-    #   before(:all) do
-    #     @driver.start_driver()
-    #     swtich_months(12, 'next')
-    #   end
-    #   # Test session ends
-    #   after(:all) do
-    #     @driver.quit
-    #   end
-    #
-    #   it 'doesn`t show checked date next year' do # Scenario failing
-    #     checked = @driver.find_element(:xpath,
-    #       "//android.view.View[@text='#{@today.day}']").checked?()
-    #
-    #     expect(checked).to eq("false")
-    #   end
-    #
-    #   it 'shows next year in header after selecting' do
-    #     select = @driver.find_element(:xpath,
-    #       "//android.view.View[@text='#{@today.day}']").click
-    #     year = @driver.find_element(:id, 'android:id/date_picker_header_year').text
-    #
-    #     expect(year).to eq("#{@next_year.year}")
-    #   end
-    #
-    #   it 'shows next year date in header after selecting' do
-    #     select = @driver.find_element(:xpath,
-    #       "//android.view.View[@text='#{@today.day}']").click
-    #     date = @driver.find_element(:id, 'android:id/date_picker_header_date').text
-    #
-    #     expect(date).to eq(@next_year.strftime('%a, %b %d'))
-    #   end
-    # end
+    # Section related to past time
+    describe "interactions with previous year elements" do
+      # New session starts and kill previoius session to increase speed of tests
+      before(:all) do
+        @driver.start_driver()
+        swtich_months(12, 'prev')
+      end
+
+      it 'doesn`t shows checked date last year' do # Scenario failing
+        checked = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@today.day}']").checked?()
+
+        expect(checked).to eq("false")
+      end
+
+      it 'shows last year in header after selecting' do
+        select = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@today.day}']").click
+        year = @driver.find_element(:id, @elements['id_header_year']).text
+
+        expect(year).to eq("#{@prev_year.year}")
+      end
+
+      it 'shows last year date in header after selecting' do
+        select = @driver.find_element(:xpath,
+          "#{@elements['xpath_calendar_text']}'#{@today.day}']").click
+        date = @driver.find_element(:id, @elements['id_header_date']).text
+
+        expect(date).to eq(@prev_year.strftime('%a, %b %d'))
+      end
+    end
+
+    # Section related to futur time
+    describe "interaction with next year elements" do
+      # New session starts and kill previoius session to increase speed of tests
+      before(:all) do
+        @driver.start_driver()
+        swtich_months(12, 'next')
+      end
+
+      it 'doesn`t show checked date next year' do # Scenario failing
+        checked = @driver.find_element(:xpath,
+            "#{@elements['xpath_calendar_text']}'#{@today.day}']").checked?()
+
+        expect(checked).to eq("false")
+      end
+
+      it 'shows next year in header after selecting' do
+        select = @driver.find_element(:xpath,
+            "#{@elements['xpath_calendar_text']}'#{@today.day}']").click
+        year = @driver.find_element(:id, @elements['id_header_year']).text
+
+        expect(year).to eq("#{@next_year.year}")
+      end
+
+      it 'shows next year date in header after selecting' do
+        select = @driver.find_element(:xpath,
+          "//android.view.View[@text='#{@today.day}']").click
+        date = @driver.find_element(:id, @elements['id_header_date']).text
+
+        expect(date).to eq(@next_year.strftime('%a, %b %d'))
+      end
+    end
 end
