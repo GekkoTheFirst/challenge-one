@@ -32,8 +32,9 @@ Appium web driver can be downloaded in two ways: [via terminal](http://appium.io
 I prefer a terminal command. Do not forget to use *appium-doctor*. It helps you to locate a problematic point on your machine as Appium requires a lot of dependencies and correct paths.
 
 ### Run project
-If you read this section I assume you performed all required actions.
-* By now you should have android emulator that can be launched by:
+If you read this section I assume you performed all required actions. To run this project you would need three terminal windows to be open.
+1. Emulator:
+Open first terminal window and launch the android emulator. By now you should have created one that can be launched by:
 > $ /Users/{USER_NAME}/Library/Android/sdk/emulator/emulator -avd avd_name
 
 If you do not know the name of you emulator use this command to find existing emulators:
@@ -41,17 +42,17 @@ If you do not know the name of you emulator use this command to find existing em
 
 *NB!* Do not forget to activate [USB debugging](https://www.qafox.com/appium-enabling-debugging-mode-in-android-devices-emulators/) on emulator otherwise Appium won't recognise your device.
 
-* Open new terminal window and start Appium client by:
+2. Appium:
+Open second terminal window and start Appium client by writting next command:
 > appium
 
-* Opne another terminal window and navigate to project folder. We can run the project by next command:
+3. Execution the code:
+You will run the code in the last terminal window. I use rspec testing framework to write, run, and generate output report. Navigate to project folder and run the code by the next command:
 > $ rspec main_activity_spec.rb
 
-I use rspec testing framework to generate a report in the terminal (that's why you need 3 terminal windows at the same time).
+There are 14 testing cases where 2 cases failing. It means the app has defects. If case fails screenshots are made and stored in [/outputs](/outputs) folder.
 
-There are 14 testing cases where 2 cases failing. It means the app has defects. Screenshots are made after the run. It can be located in _/outputs_ folder.
-
-List of the cases:
+[List of the test cases](main_activity_spec.rb):
 1. it 'closes the application without crash'
 2. it 'launches the application without crash'
 3. it 'shows the activity title'
