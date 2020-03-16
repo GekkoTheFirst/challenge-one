@@ -1,0 +1,11 @@
+# NOTE:
+# This yml file contains all paths for UI elements
+app_name: TestApplication
+app_package: gmbh.ambidexter.testapplication
+
+id_header_year: android:id/date_picker_header_year
+id_header_date: android:id/date_picker_header_date
+id_next: android:id/next
+id_prev: android:id/prev
+
+xpath_app_name: //android.view.ViewGroup//android.widget.FrameLayout[1]//android.view.ViewGroup//android.widget.TextView
