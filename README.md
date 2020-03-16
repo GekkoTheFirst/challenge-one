@@ -46,7 +46,7 @@ If you do not know the name of you emulator use this command to find existing em
 Open second terminal window and start Appium client by writting next command:
 > appium
 
-3. Execution the code:
+3. Execute the code:
 You will run the code in the last terminal window. I use rspec testing framework to write, run, and generate output report. Navigate to project folder and run the code by the next command:
 > $ rspec main_activity_spec.rb
 
