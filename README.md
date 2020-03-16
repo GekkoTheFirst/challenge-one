@@ -52,20 +52,20 @@ I use rspec testing framework to generate a report in the terminal (that's why y
 There are 14 testing cases where 2 cases failing. It means the app has defects. Screenshots are made after the run. It can be located in _/outputs_ folder.
 
 List of the cases:
-it 'closes the application without crash'
-it 'launches the application without crash'
-it 'shows the activity title'
-it 'shows checked today`s date'
-it 'shows current in header'
-it 'shows today`s date in header'
-it 'shows yesterday`s date in header'
-it 'shows checked tomorrow`s date after selecting'
-it 'doesn`t shows checked date last year'
-it 'shows last year in header after selecting'
-it 'shows last year date in header after selecting'
-it 'doesn`t show checked date next year'
-it 'shows next year in header after selecting'
-it 'shows next year date in header after selecting'
+1. it 'closes the application without crash'
+2. it 'launches the application without crash'
+3. it 'shows the activity title'
+4. it 'shows checked today`s date'
+5. it 'shows current in header'
+6. it 'shows today`s date in header'
+7. it 'shows yesterday`s date in header'
+8. it 'shows checked tomorrow`s date after selecting'
+9. it 'doesn`t shows checked date last year'
+10. it 'shows last year in header after selecting'
+11. it 'shows last year date in header after selecting'
+12. it 'doesn`t show checked date next year'
+13. it 'shows next year in header after selecting'
+14. it 'shows next year date in header after selecting'
 
 ### License
 Appium uses [Apache License 2.0](https://github.com/appium/appium/blob/master/LICENSE)
