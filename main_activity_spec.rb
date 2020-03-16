@@ -47,6 +47,11 @@ RSpec.describe "MainActitivity" do
     end
   end
 
+  # Global hook to kill the session
+  after(:all) do
+    @driver.quit()
+  end
+
     # Section related to "now" time
     describe "interactions with current month elements" do
 
