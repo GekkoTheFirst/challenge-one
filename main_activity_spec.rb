@@ -47,11 +47,6 @@ RSpec.describe "MainActitivity" do
     end
   end
 
-  # After all cases it kills the appium driver
-  after(:all) do
-    @driver.quit()
-  end
-
     # Section related to "now" time
     describe "interactions with current month elements" do
 
@@ -151,6 +146,10 @@ RSpec.describe "MainActitivity" do
       before(:all) do
         @driver.start_driver()
         swtich_months(12, 'next')
+      end
+      # Kills the session
+      after(:all) do
+        @driver.quit()
       end
 
       it 'doesn`t show checked date next year' do # Scenario failing
