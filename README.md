@@ -17,13 +17,14 @@ In AVD manager you need to create [an emulator](https://developer.android.com/st
 ### GitHub
 Clone the repository on your machine.
 
-### Ruby & bundle
+### Java, Ruby & bundle
 You need to install ruby if you do not have it yet. Also I use [bundler](https://bundler.io/) to keep gems dependencies. It means bundler need to be installed first by next command inside cloned directory:
 > $ gem install bundler
 
 Next step is to install all dependencies (gems)
 > $ bundle install
 
+Even there is no Java in this project you need to install it as well. It is required by Appium and Android.
 We are almost on half way to success.
 
 ### Appium
@@ -34,12 +35,12 @@ I prefer a terminal command. Do not forget to use *appium-doctor*. It helps you 
 ### Run project
 If you read this section I assume you performed all required actions.
 * By now you should have android emulator that can be launched by:
-> $ emulator -avd avd_name
+> $ /Users/{USER_NAME}/Library/Android/sdk/emulator/emulator -avd avd_name
 
 If you do not know the name of you emulator use this command to find existing emulators:
-> $ emulator -list-avds
+> $ /Users/{USER_NAME}/Library/Android/sdk/emulator/emulator -list-avds
 
-*NB!* Do not forget to activate [debugging mode](https://www.qafox.com/appium-enabling-debugging-mode-in-android-devices-emulators/) on emulator otherwise Appium won't recognise your device.
+*NB!* Do not forget to activate [USB debugging](https://www.qafox.com/appium-enabling-debugging-mode-in-android-devices-emulators/) on emulator otherwise Appium won't recognise your device.
 
 * Open new terminal window and start Appium client by:
 > appium
