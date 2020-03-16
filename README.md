@@ -1,18 +1,18 @@
 # Structure
-It is a solution for the test challenge. It is written in ruby, because of limited time and corona virus situation in general.
-However it can be easily converted into Java syntax. All relevant and required information for this application
-can be found on [appium website](http://appium.io/docs/en/commands/status/).
-This article contains few chapters to explain the steps to run the project on Android simulator.
+It is my solution for the test challenge. It is written in ruby. However it can be easily converted into Java syntax. All relevant and required information for this application can be found on [appium website](http://appium.io/docs/en/commands/status/).
 
+This article contains few chapters to explain the steps how to build & run the project on an Android simulator.
+
+## Application
 ![GitHub](/resources/app.png)
 
 
 ### Pre-work & emulator
-To start this project I had to perform some background work first. I started with creating an apk file in Android studio.
+To start this project I had to perform some background job first. I started with creating an apk file in Android studio.
 The apk file can be located [here](https://github.com/GekkoTheFirst/challenge-one/tree/master/resources).
-To make an apk file please download [Android studio](https://developer.android.com/studio), AVD manager and adb (android  debug bridge).
+To make an apk file you would need to use next tools: Android studion, AVD manager and adb (android  debug bridge). You can get all these tools by downloading & installing [Android studio](https://developer.android.com/studio).
 
-In AVD manager you need to create [an emulator](https://developer.android.com/studio/run/managing-avds) (don't forget to download all components).
+After installing the tools, you would need to create at least one emulator in AVD manager. You can find [how to article here](https://developer.android.com/studio/run/managing-avds) (don't forget to download all components via avd manager).
 
 ### GitHub
 Clone the repository on your machine.
@@ -24,8 +24,7 @@ You need to install ruby if you do not have it yet. Also I use [bundler](https:/
 Next step is to install all dependencies (gems)
 > $ bundle install
 
-Even there is no Java in this project you need to install it as well. It is required by Appium and Android.
-We are almost on half way to success.
+Even there is no [Java](https://www.java.com/en/download/) used in this project at first look. You need to install it as well. It is required by Appium and Android. We are almost on half way to success.
 
 ### Appium
 Appium web driver can be downloaded in two ways: [via terminal](http://appium.io/docs/en/about-appium/getting-started/) or download [a client](https://github.com/appium/appium-desktop/releases/tag/v1.15.1).

@@ -35,9 +35,9 @@ class MainActitivity
     }
   end
 
-  # Appium iOS parameters
+  # Appium iOS parameters. It doesn't work as there is no app file in this project
   def ios_caps()
-    app = 'resources/app-debug.app'
+    app = 'APP FILE PATH'
     return { caps: {
                 platformName:  'iOS',
                 platformVersion: "13.1",
