@@ -52,7 +52,7 @@ You will run the code in the last terminal window. I use rspec testing framework
 
 There are 14 testing cases where 2 cases failing. It means the app has defects. If case fails screenshots are made and stored in [/outputs](/outputs) folder.
 
-[List of the test cases](main_activity_spec.rb):
+[List of the test cases](https://github.com/GekkoTheFirst/challenge-one/blob/07c6819c8fddd60c099c5a0d8e1bdb7c479677c2/main_activity_spec.rb#L56):
 1. it 'closes the application without crash'
 2. it 'launches the application without crash'
 3. it 'shows the activity title'
