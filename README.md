@@ -1,11 +1,11 @@
 # Structure
-It is a solution for the test challenge. It is written in ruby, because of the time limit - one day.
+It is a solution for the test challenge. It is written in ruby, because of limited time and corona virus situation in general.
 However it can be easily converted into Java syntax. All relevant and required information for this application
 can be found on [appium website](http://appium.io/docs/en/commands/status/).
+This article contains few chapters to explain the steps to run the project on Android simulator.
 
 ![GitHub](/resources/app.png)
 
-This article contains few chapters to explain the steps to run the project on Android simulator.
 
 ### Pre-work & emulator
 To start this project I had to perform some background work first. I started with creating an apk file in Android studio.
@@ -50,6 +50,22 @@ If you do not know the name of you emulator use this command to find existing em
 I use rspec testing framework to generate a report in the terminal (that's why you need 3 terminal windows at the same time).
 
 There are 14 testing cases where 2 cases failing. It means the app has defects. Screenshots are made after the run. It can be located in _/outputs_ folder.
+
+List of the cases:
+it 'closes the application without crash'
+it 'launches the application without crash'
+it 'shows the activity title'
+it 'shows checked today`s date'
+it 'shows current in header'
+it 'shows today`s date in header'
+it 'shows yesterday`s date in header'
+it 'shows checked tomorrow`s date after selecting'
+it 'doesn`t shows checked date last year'
+it 'shows last year in header after selecting'
+it 'shows last year date in header after selecting'
+it 'doesn`t show checked date next year'
+it 'shows next year in header after selecting'
+it 'shows next year date in header after selecting'
 
 ### License
 Appium uses [Apache License 2.0](https://github.com/appium/appium/blob/master/LICENSE)
