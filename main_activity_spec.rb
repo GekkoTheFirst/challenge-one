@@ -1,16 +1,17 @@
 # NOTE:
-# Main
+# Testing MainActivity screen.
+# Run test using rspec framework use next command rspec main_activity_spec.rb
+require 'date'
+require 'yaml'
+require 'rspec'
+require_relative 'appium_driver'
 
-RSpec.describe "MainActitivity" do
-  require 'date'
-  require 'yaml'
-  require 'rspec'
-  require_relative 'main_activity'
+RSpec.describe AppiumDriver do
 
-  # Global hook to create an appium web driver, YAML and Time objects
+  # Global hook to start an appium webdriver, YAML and Time objects
   before(:all) do
     # Appium driver
-    @driver = MainActitivity.new()
+    @driver = AppiumDriver.new()
     @driver.start_driver()
     # Today's date object
     @today = Date.today()
@@ -19,20 +20,7 @@ RSpec.describe "MainActitivity" do
     @prev_year = @today.prev_year()
     @next_year = @today.next_year()
     # YMAL object containing xpath and id elements
-    @elements = YAML.load_file('mobile_elements.yml')
-  end
-
-  # Helper to move months back and forward.
-  # int: mounth_counter -  amount of mounts to movement
-  # string: movement - 'prev' moving to the past, 'next' moving to the future
-  def swtich_months(mounth_counter, movement)
-    mounth_counter.times do
-      if movement.eql?('prev')
-        @driver.find_element(:id, @elements['id_prev']).click
-      else
-        @driver.find_element(:id, @elements['id_next']).click
-      end
-    end
+    @yml_element = YAML.load_file('mobile_elements.yml')
   end
 
   # Before each hooks set a unix time to distiguish failing scenarios
@@ -47,9 +35,9 @@ RSpec.describe "MainActitivity" do
     end
   end
 
-  # Global hook to kill the session
+  # Global hook to stop the session
   after(:all) do
-    @driver.quit()
+    @driver.driver_quit()
   end
 
     # Section related to "now" time
@@ -59,123 +47,108 @@ RSpec.describe "MainActitivity" do
         @driver.close_app
         package = @driver.current_package
 
-        expect(package).not_to eq(@elements['app_package'])
+        expect(package).not_to eq(@yml_element['app_package'])
       end
 
       it 'launches the application without crash' do
         @driver.launch_app
         package = @driver.current_package
 
-        expect(package).to eq(@elements['app_package'])
+        expect(package).to eq(@yml_element['app_package'])
       end
 
       it 'shows the activity title' do
-        title = @driver.find_element(:xpath, @elements['xpath_app_name']).text
+        title = @driver.xpath_element_get_text('xpath_app_name')
 
-        expect(title).to eq(@elements['app_name'])
+        expect(title).to eq(@yml_element['app_name'])
       end
 
       it 'shows checked today`s date' do
-        checked = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@today.day}']").checked?()
+        check = @driver.xpath_date_checked?(@today.day)
 
-        expect(checked).to eq("true")
+        expect(check).to eq("true")
       end
 
       it 'shows current in header' do
-        date = @driver.find_element(:id, @elements['id_header_year']).text
+        date = @driver.id_element_get_text('id_header_year')
 
         expect(date).to eq("#{@today.year}")
       end
 
       it 'shows today`s date in header' do
-        date = @driver.find_element(:id, @elements['id_header_date']).text
+        date = @driver.id_element_get_text('id_header_date')
 
         expect(date).to eq(@today.strftime('%a, %b %d'))
       end
 
       it 'shows yesterday`s date in header' do
-        select = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@yesterday.day}']").click
-        checked = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@yesterday.day}']").checked?()
+        select = @driver.xpath_date_click(@yesterday.day)
+        check = @driver.xpath_date_checked?(@yesterday.day)
 
-        expect(checked).to eq("true")
+        expect(check).to eq("true")
       end
 
       it 'shows checked tomorrow`s date after selecting' do
-        select = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@tomorrow.day}']").click
-        checked = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@tomorrow.day}']").checked?()
+        select = @driver.xpath_date_click(@tomorrow.day)
+        check = @driver.xpath_date_checked?(@tomorrow.day)
 
-        expect(checked).to eq("true")
+        expect(check).to eq("true")
       end
     end
 
-    # Section related to past time
+    # Past time section
     describe "interactions with previous year elements" do
-      # New session starts and kill previoius session to increase speed of tests
+      # Driver restarted to increase speed of tests
       before(:all) do
-        @driver.start_driver()
-        swtich_months(12, 'prev')
+        @driver.restart()
+        @driver.swtich_months(12, 'prev')
       end
 
       it 'doesn`t shows checked date last year' do # Scenario failing
-        checked = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@today.day}']").checked?()
+        check = @driver.xpath_date_checked?(@today.day)
 
-        expect(checked).to eq("false")
+        expect(check).to eq("false")
       end
 
       it 'shows last year in header after selecting' do
-        select = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@today.day}']").click
-        year = @driver.find_element(:id, @elements['id_header_year']).text
+        select = @driver.xpath_date_click(@today.day)
+        year = @driver.id_element_get_text('id_header_year')
 
         expect(year).to eq("#{@prev_year.year}")
       end
 
       it 'shows last year date in header after selecting' do
-        select = @driver.find_element(:xpath,
-          "#{@elements['xpath_calendar_text']}'#{@today.day}']").click
-        date = @driver.find_element(:id, @elements['id_header_date']).text
+        select = @driver.xpath_date_click(@today.day)
+        date = @driver.id_element_get_text('id_header_date')
 
         expect(date).to eq(@prev_year.strftime('%a, %b %d'))
       end
     end
 
-    # Section related to futur time
+    # Future time section
     describe "interaction with next year elements" do
-      # New session starts and kill previoius session to increase speed of tests
+      # Driver restarted to increase speed of tests
       before(:all) do
-        @driver.start_driver()
-        swtich_months(12, 'next')
-      end
-      # Kills the session
-      after(:all) do
-        @driver.quit()
+        @driver.restart()
+        @driver.swtich_months(12, 'next')
       end
 
       it 'doesn`t show checked date next year' do # Scenario failing
-        checked = @driver.find_element(:xpath,
-            "#{@elements['xpath_calendar_text']}'#{@today.day}']").checked?()
+        check = @driver.xpath_date_checked?(@today.day)
 
-        expect(checked).to eq("false")
+        expect(check).to eq("false")
       end
 
       it 'shows next year in header after selecting' do
-        select = @driver.find_element(:xpath,
-            "#{@elements['xpath_calendar_text']}'#{@today.day}']").click
-        year = @driver.find_element(:id, @elements['id_header_year']).text
+        select = @driver.xpath_date_click(@today.day)
+        year = @driver.id_element_get_text('id_header_year')
 
         expect(year).to eq("#{@next_year.year}")
       end
 
       it 'shows next year date in header after selecting' do
-        select = @driver.find_element(:xpath,
-          "//android.view.View[@text='#{@today.day}']").click
-        date = @driver.find_element(:id, @elements['id_header_date']).text
+        select = @driver.xpath_date_click(@today.day)
+        date = @driver.id_element_get_text('id_header_date')
 
         expect(date).to eq(@next_year.strftime('%a, %b %d'))
       end
