@@ -1,4 +1,4 @@
-# Ruby project
+# Ruby project:
 It has two solutions: 1 - select a date from a date picker. 2 - run a test suite.
 
 ## Preparation for running
