@@ -31,7 +31,7 @@ RSpec.describe AppiumDriver do
   # After each hook if scenario has exception or fails then screenshot created
   after(:each) do |example|
     if example.exception
-      @driver.save_viewport_screenshot("outputs/#{@unix_time}.png")
+      @driver.screenshot("outputs/#{@unix_time}.png")
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe AppiumDriver do
         expect(check).to eq("true")
       end
 
-      it 'shows current in header' do
+      it 'shows current year in header' do
         date = @driver.id_element_get_text('id_header_year')
 
         expect(date).to eq("#{@today.year}")
@@ -94,6 +94,21 @@ RSpec.describe AppiumDriver do
 
         expect(check).to eq("true")
       end
+
+      it 'shows last month in header' do
+        select = @driver.swtich_months(1, 'prev')
+        check = @driver.xpath_date_checked?(@today.day)
+
+        expect(check).to eq('false')
+      end
+
+      it 'shows next month in header' do
+        select = @driver.swtich_months(2, 'next')
+        check = @driver.xpath_date_checked?(@today.day)
+
+        expect(check).to eq("false")
+      end
+
     end
 
     # Past time section
@@ -101,7 +116,8 @@ RSpec.describe AppiumDriver do
       # Driver restarted to increase speed of tests
       before(:all) do
         @driver.restart()
-        @driver.swtich_months(12, 'prev')
+        @driver.id_element_click('id_header_year')
+        @driver.xpath_year_click(@prev_year.year)
       end
 
       it 'doesn`t shows checked date last year' do # Scenario failing
@@ -130,7 +146,8 @@ RSpec.describe AppiumDriver do
       # Driver restarted to increase speed of tests
       before(:all) do
         @driver.restart()
-        @driver.swtich_months(12, 'next')
+        @driver.id_element_click('id_header_year')
+        @driver.xpath_year_click(@next_year.year)
       end
 
       it 'doesn`t show checked date next year' do # Scenario failing
