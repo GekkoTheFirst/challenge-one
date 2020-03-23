@@ -26,7 +26,7 @@ Open second terminal window and start Appium client by writing next command:
 You will run the code in the last terminal window. There are two solutions, so use right one to run wanted output.
 
 ### Run the date picker
-Use _date_picker.rb_ ruby file to run, and generate output report. To select a date the date need to be written in next format: _yyyy-mm-dd_. Now navigate to project folder and run the code by the next command:
+Use _date_picker.rb_ ruby file to run. It generates output simple report. To select a date write date in follow format: _yyyy-mm-dd_. Now navigate to project folder and run the code by the next command:
 > $ ruby data_picker.rb yyyy-mm-dd
 
 ### Run the test suite
