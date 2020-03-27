@@ -1,12 +1,13 @@
 # Structure
-It is my solution for the test challenge. It is written in ruby & in java.
-Ruby solution is located [HERE](https://github.com/GekkoTheFirst/challenge-one/tree/master/ruby)
-*WIP* Java solution is located [HERE](https://github.com/GekkoTheFirst/challenge-one/tree/master/ruby)
+It is my solution for the test challenge. It is written in ruby & in java:
+* Ruby solution is located [HERE](https://github.com/GekkoTheFirst/challenge-one/tree/master/ruby)
+* Java solution is located [HERE](https://github.com/GekkoTheFirst/challenge-one/tree/master/java)
 
 This article contains few chapters to explain the steps how to build & run the project on an Android simulator.
 
 ## Application
 This is how application looks like:
+
 ![GitHub](/resources/app.png)
 
 
@@ -20,18 +21,18 @@ After installing the tools, you would need to create at least one emulator in AV
 ### GitHub
 Clone the repository on your machine.
 
-### Java, Ruby & bundle
-If you run JAVA solution, you need to install [Java](https://www.java.com/en/download/). You need to install before running the project.
+### Java & Gradle, Ruby & bundle
+Java:
+If you run JAVA solution, you need to install [Java](https://www.java.com/en/download/) and Gradle. To make it easier just download and install IDE like [Android studio](https://developer.android.com/studio)
 
-*WIP*
-
+Ruby:
 If you run ruby solution, you need ruby if you do not have it yet. Also I use [bundler](https://bundler.io/) to keep gems dependencies. It means bundler need to be installed first by next command inside cloned directory:
 > $ gem install bundler
 
 Next step is to install all dependencies (gems)
 > $ bundle install
 
-Do not forget to install java as it is required by Appium and Android studio.
+Do not forget to install npm & java as it is required by Appium client and Android studio.
 
 ### Appium
 Appium web driver can be downloaded in two ways: [via terminal](http://appium.io/docs/en/about-appium/getting-started/) or download [a client](https://github.com/appium/appium-desktop/releases/tag/v1.15.1). I personally prefer a terminal command.
@@ -39,7 +40,7 @@ Appium web driver can be downloaded in two ways: [via terminal](http://appium.io
 If you face with some problems, install a npm package: *[appium-doctor](https://www.npmjs.com/package/appium-doctor)*. It helps you to locate a problematic point on your machine because Appium requires a lot of dependencies and correct paths.
 
 _Android setup_
-Appium will use the first device that connected to ADB so please check adb devices and make sure that at lease one device is connected.
+Appium will use the first device that connected to ADB so please check *adb devices* and make sure that at lease one device is connected.
 *NB!* Do not forget to activate [USB debugging](https://www.qafox.com/appium-enabling-debugging-mode-in-android-devices-emulators/) on emulator otherwise Appium won't recognise your device.
 
 If you look for more information, you find it [here](https://github.com/appium/appium/blob/master/docs/en/drivers/android-uiautomator2.md)

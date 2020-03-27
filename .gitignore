@@ -3,3 +3,9 @@
 
 # Generated files
 outputs/*.png
+
+# IDEA associated files
+.idea
+
+# Gradle
+.gradle
