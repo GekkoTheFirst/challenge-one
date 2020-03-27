@@ -23,9 +23,11 @@ Clone the repository on your machine.
 
 ### Java & Gradle, Ruby & bundle
 Java:
+
 If you run JAVA solution, you need to install [Java](https://www.java.com/en/download/) and Gradle. To make it easier just download and install IDE like [Android studio](https://developer.android.com/studio)
 
 Ruby:
+
 If you run ruby solution, you need ruby if you do not have it yet. Also I use [bundler](https://bundler.io/) to keep gems dependencies. It means bundler need to be installed first by next command inside cloned directory:
 > $ gem install bundler
 

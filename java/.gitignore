@@ -1,0 +1,16 @@
+# DS_Store
+*.DS_Store
+
+# Generated files
+outputs/*.png
+
+# IDEA associated files
+.idea
+
+# Properties
+local.properties
+
+# Gradle
+.gradle
+gradlew
+gradlew.bat
