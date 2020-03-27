@@ -13,7 +13,7 @@ class AppiumDriver
 
   def initialize()
     # YMAL object containing xpath and id elements
-    @yml_element = YAML.load_file('mobile_elements.yml')
+    @yml_element = YAML.load_file('../resources/mobile_elements.yml')
 
     # Selecting opts based on given info
     opts = select_emulator(platform?())
@@ -65,10 +65,10 @@ class AppiumDriver
   end
 
   # Helper to move months back and forward.
-  # int: mounth_counter -  amount of mounts to move calendar
+  # int: month_counter -  amount of months to move calendar
   # string: move - 'prev' moving to the past, 'next' moving to the future
-  def swtich_months(mounth_counter, move)
-    mounth_counter.times do
+  def swtich_months(month_counter, move)
+    month_counter.times do
       if move.eql?('prev')
         @appium.find_element(:id, @yml_element['id_prev']).click
       else
@@ -103,15 +103,15 @@ class AppiumDriver
       :id, "#{@yml_element['xpath_calendar_text']}'#{day}']").click
   end
 
-  # Looking for id element using int: date.
+  # Looking for xpath element using int: date.
   # Date is needed to distiguish between calendar date elements
   def xpath_date_click(day)
     @appium.find_element(
       :xpath, "#{@yml_element['xpath_calendar_text']}'#{day}']").click
   end
 
-  # Looking for id element using int: date.
-  # Date is needed to distiguish between calendar date elements
+  # Looking for xpath element using int: date.
+  # Year is needed to distiguish between calendar date elements
   def xpath_year_click(year)
     @appium.find_element(
       :xpath, "#{@yml_element['xpath_year_text']}'#{year}']").click
@@ -178,13 +178,13 @@ class AppiumDriver
 ### TEXT ###
 
   # Looking for id element and return text
-  # string: name - id or xpath name taken from mobile_elements.yml
+  # string: name - id name taken from mobile_elements.yml
   def id_element_get_text(name)
     return @appium.find_element(:id, @yml_element[name]).text
   end
 
   # Looking for xpat element and return text
-  # string: name - id or xpath name taken from mobile_elements.yml
+  # string: name - xpath name taken from mobile_elements.yml
   def xpath_element_get_text(name)
     return @appium.find_element(:xpath, @yml_element[name]).text
   end

@@ -20,7 +20,7 @@ RSpec.describe AppiumDriver do
     @prev_year = @today.prev_year()
     @next_year = @today.next_year()
     # YMAL object containing xpath and id elements
-    @yml_element = YAML.load_file('mobile_elements.yml')
+    @yml_element = YAML.load_file('../resources/mobile_elements.yml')
   end
 
   # Before each hooks set a unix time to distiguish failing scenarios

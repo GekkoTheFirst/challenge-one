@@ -54,9 +54,9 @@ class DatePicker
 
   def swipe_month()
     currnet_month = DateTime.now.month
-    diff = currnet_month - extract_month
+    diff = currnet_month - extract_month()
 
-    if currnet_month > extract_month
+    if currnet_month > extract_month()
       @driver.swtich_months(diff, 'prev')
     else
       @driver.swtich_months(diff.abs, 'next')
@@ -110,10 +110,10 @@ begin
     puts " --------- "
     s.stop_driver()
   else
-    puts "NB!!! Algorith works between #{min_year} and #{max_year} years"
+    puts "NB!!! Algorithm works between #{min_year} and #{max_year} years"
     exit 1
   end
 
 rescue ArgumentError
-  puts "Please check date input format: yyyy-mm-dd where y - year; m - month; d - day. Example for 31 January 2000: 2000-01-31 "
+  puts "Please check date input format: yyyy-mm-dd where y - year; m - month; d - day. Example for 31 January 2000: 2000-01-31"
 end

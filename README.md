@@ -38,5 +38,13 @@ Appium web driver can be downloaded in two ways: [via terminal](http://appium.io
 
 If you face with some problems, install a npm package: *[appium-doctor](https://www.npmjs.com/package/appium-doctor)*. It helps you to locate a problematic point on your machine because Appium requires a lot of dependencies and correct paths.
 
+_Android setup_
+Appium will use the first device that connected to ADB so please check adb devices and make sure that at lease one device is connected.
+*NB!* Do not forget to activate [USB debugging](https://www.qafox.com/appium-enabling-debugging-mode-in-android-devices-emulators/) on emulator otherwise Appium won't recognise your device.
+
+If you look for more information, you find it [here](https://github.com/appium/appium/blob/master/docs/en/drivers/android-uiautomator2.md)
+
 ### License
-Appium uses [Apache License 2.0](https://github.com/appium/appium/blob/master/LICENSE)
+appium & RxJava use Apache License 2.0
+https://github.com/appium/appium/blob/master/LICENSE
+https://github.com/ReactiveX/RxJava/blob/3.x/LICENSE
