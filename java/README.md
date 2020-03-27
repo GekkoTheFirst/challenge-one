@@ -3,11 +3,10 @@
 ## Preparation for running
 To run this project you would need three terminal windows or IDE.
 1. Emulator:
-Easy Way:
-Open project in an IDE and create an emulator in IDE (I used Android studio).
 
-Hard Way:
-We assume you have avd installed and emulators configured.
+Easy Way: Open project in an IDE and create an emulator in IDE (I used Android studio).
+
+Hard Way: We assume you have avd installed and emulators configured.
 Open first terminal window and launch the android emulator. By now you should have created one that can be launched by:
 > $ /Users/{USER_NAME}/Library/Android/sdk/emulator/emulator -avd avd_name
 
@@ -26,7 +25,7 @@ Open second terminal window and start Appium client by writing next command:
 > appium
 
 3. Execute the code:
-Before run you need to set up right android version that you can find in Settings on your emulator or physical devices. Go to [AppDriver](https://github.com/GekkoTheFirst/challenge-one/blob/master/java/src/test/java/challenge/AppTest.java#L63)
+Before run you need to set up right android version that you can find in Settings on your emulator or physical devices. Go to [AppDriver](https://github.com/GekkoTheFirst/challenge-one/blob/master/java/src/main/java/challenge/AppDriver.java#L63)
 and change _caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.0")_ according to your Android device or emulator version.
 
 To edit or set the data can done directly in file before the run [AppTest](https://github.com/GekkoTheFirst/challenge-one/blob/master/java/src/test/java/challenge/AppTest.java#L31).
